@@ -1,8 +1,15 @@
-
 const puppeteer = require('puppeteer');
-const fs = require('fs');
-
+require('dotenv').config();
 const scrapeLogic = async (res) => {
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox', 'single-process', 'no-zygote'],
+    executablePath:
+      process.env.NODE_ENV === 'production'
+        ? process.env.PUPPETEER_EXECUTABLE_PATH :
+        puppeteer.executablePath(),
+  });
+  const page = await browser.newPage();
+  const url = "https://www.google.com/maps/place/PT+TOTAL+PINDAH/@-6.2126887,106.8505721,17z/data=!3m1!4b1!4m6!3m5!1s0x2e69f5007849682f:0x97ee44bc061d1fae!8m2!3d-6.212694!4d106.853147!16s%2Fg%2F11vx6q6p4z?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D";
   try {
     async function getNameOfReview(page) {
       let names = [];
@@ -50,9 +57,7 @@ const scrapeLogic = async (res) => {
       return review;
     }
 
-    const browser = await puppeteer.launch({ headless: false });
-    const page = await browser.newPage();
-    const url = "https://www.google.com/maps/place/PT+TOTAL+PINDAH/@-6.2126887,106.8505721,17z/data=!3m1!4b1!4m6!3m5!1s0x2e69f5007849682f:0x97ee44bc061d1fae!8m2!3d-6.212694!4d106.853147!16s%2Fg%2F11vx6q6p4z?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D";
+
 
     try {
       await page.goto(url, { waitUntil: 'domcontentloaded' });
