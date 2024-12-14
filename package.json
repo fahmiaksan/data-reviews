@@ -1,0 +1,17 @@
+{
+  "name": "data-reviews",
+  "version": "1.0.0",
+  "description": "Scrapping data reviews google map",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "dev": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "fahmi aksan nugroho",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.1.9",
+    "puppeteer": "^23.10.4"
+  }
+}
