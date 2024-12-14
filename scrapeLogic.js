@@ -76,9 +76,10 @@ const scrapeLogic = async (res) => {
       res.json(data);
     } catch (error) {
       console.error('Error writing to reviews.json:', error);
+    } finally {
+      await browser.close();
     }
 
-    await browser.close();
   } catch (error) {
     console.error('An unexpected error occurred:', error);
   }
